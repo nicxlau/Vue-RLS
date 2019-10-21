@@ -115,16 +115,16 @@ Now you can acess `localStorage` or `sessionStorage` with namespace `storage` in
 
 ## All usage methods
 ```js
-store.name = 'Jacob';  // creat a variable in storage
-storage.name           // return a variable value from storage
-store.get('name');     // another way to return a variable value from storage
-store.options({        // change drive to sessionStorage
+storage.name = 'Jacob';  // creat a variable in storage
+storage.name;            // return a variable value from storage
+storage.get('name');     // another way to return a variable value from storage
+storage.options({        // change drive to sessionStorage
 	'driver': 'session'
 });
-store.set('name', 'Jacob');        // creat a variable in storage
-store.set('last_name', 'Kuuhaku'); // creat another variable in storage
-store.delete('last_name');         // destroy a variable
-store.clear();                     // destroy all variable from selected storage in options
+storage.set('name', 'Jacob');        // creat a variable in storage
+storage.set('last_name', 'Kuuhaku'); // creat another variable in storage
+storage.delete('last_name');         // destroy a variable
+storage.clear();                     // destroy all variable from selected storage in options
 
 ```
 
