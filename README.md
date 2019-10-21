@@ -1,4 +1,5 @@
 
+
 # Vue-RLS
 #### Reactive wrapper over browser storage for Vue.js
 
@@ -100,7 +101,32 @@ Now you can acess `localStorage` or `sessionStorage` with namespace `storage` in
 | - | - | - | - |
 **`prefix`** | String | `app_` | Variable name prefix
 **`driver`** | String | `local` | Driver name, it can be: `local`, `session` or `memory`
-**`ttl`** | Integer | `false` | Expiration time in milliseconds
+**`ttl`** | Integer \| Boolean| `false` | Expiration time in milliseconds
+
+## Public methods
+| Method | Parameters | Description |
+| - | - | - |
+**`get(name)`** | String | Search for a variable in storage
+**`set(name, value)`** | String, Mixed | Create or assign the value of a variable
+**`remove(name)`** | String | Destroys a variable
+**`delete(name)`** | String | Alias of `remove()` method
+**`clear()`** | - | Destroys all variables with prefix defined in the settings
+**`options(options)`** | Object | Assign settings
+
+## All usage methods
+```js
+store.name = 'Jacob';  // creat a variable in storage
+storage.name           // return a variable value from storage
+store.get('name');     // another way to return a variable value from storage
+store.options({        // change drive to sessionStorage
+	'driver': 'session'
+});
+store.set('name', 'Jacob');        // creat a variable in storage
+store.set('last_name', 'Kuuhaku'); // creat another variable in storage
+store.delete('last_name');         // destroy a variable
+store.clear();                     // destroy all variable from selected storage in options
+
+```
 
 ## License
 
