@@ -3,6 +3,7 @@
 }(this, function(t) {
     "use strict";
 var options = {};
+const s = {};
 class c {
 	get length() {
 		return Object.keys(this.storage).length
