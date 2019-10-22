@@ -103,7 +103,7 @@ Now you can acess `localStorage` or `sessionStorage` with namespace `storage` in
 ## Public methods
 | Method | Parameters | Description |
 | - | - | - |
-**`get(name)`** | String | Search for a variable in storage and returns its value
+**`get(name, defaultValue)`** | String, Mixed | Search for a variable in storage and returns its value
 **`set(name, value)`** | String, Mixed | Create or assign the value of a variable
 **`remove(name)`** | String | Destroys a variable
 **`delete(name)`** | String | Alias of `remove()` method
