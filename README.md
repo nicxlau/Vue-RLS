@@ -76,7 +76,7 @@ Now you can acess `localStorage` or `sessionStorage` with namespace `storage` in
 	<div id="app"></div>
 
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/jco666/Vue-RLS@latest/dist/vue-rls.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/jco666/Vue-RLS@1.1.0/dist/vue-rls.min.js"></script>
 	<script>
 	// Set initial configs
 	Vue.use(VueRLS, {
