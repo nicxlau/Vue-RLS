@@ -8,7 +8,7 @@
 ## CDN Installation
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/jco666/Vue-RLS@latest/dist/vue-rls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/jco666/Vue-RLS@1.1.0/dist/vue-rls.min.js"></script>
 ```
 
 * This package is not on NPM, use GitHub source only.
