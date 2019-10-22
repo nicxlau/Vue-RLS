@@ -1,26 +1,26 @@
-! function(t, e) {
-    "object" == typeof exports && "undefined" != typeof module ? e(exports) : "function" == typeof define && define.amd ? define(["exports"], e) : (t = t || self, e(t.VueRLS = {}))
-}(this, function(t) {
-    "use strict";
-var options = {};
+!function(t, e){
+	"object" == typeof exports && "undefined" != typeof module ? e(exports) : "function" == typeof define && define.amd ? define(["exports"], e) : (t = t || self, e(t.VueRLS = {}))
+}(this, function(t){
+	"use strict";
+
 const s = {};
 class c {
-	get length() {
+	get length(){
 		return Object.keys(this.storage).length
 	}
-	get storage() {
+	get storage(){
 		return s
 	}
-	getItem(t) {
+	getItem(t){
 		return t in this.storage ? this.storage[t] : null
 	}
-	setItem(t, e) {
+	setItem(t, e){
 		this.storage[t] = e
 	}
-	removeItem(t) {
+	removeItem(t){
 		t in this.storage && delete this.storage[t]
 	}
-	clear() {
+	clear(){
 		const t = Object.keys(this.storage);
 		for (let e = 0; e <= t.length; e++) try {
 			delete this.storage[t[e]]
@@ -29,25 +29,26 @@ class c {
 }
 var f = new c;
 
+var options = {};
 var store = {
-    _initialize: function _initialize(t){
+	_initialize: function _initialize(t){
 		this.setOptions(t)
-    },
-    _objectDefaults: function _objectDefaults(object, storage) {
-        var this$1 = this;
+	},
+	_objectDefaults: function _objectDefaults(object, storage){
+		var this$1 = this;
 
-        Object.keys(object).reduce(function (acc, key) {
-            var value = object[key];
-            if (typeof value === "object") {
-                this$1._objectDefaults(storage[key], value);
-            } else {
-                if (!storage.hasOwnProperty(key)) {
-                    storage[key] = value;
-                }
-            }
-            return acc;
-        }, []);
-    },
+		Object.keys(object).reduce(function (acc, key){
+			var value = object[key];
+			if (typeof value === "object"){
+				this$1._objectDefaults(storage[key], value);
+			}else{
+				if (!storage.hasOwnProperty(key)){
+					storage[key] = value;
+				}
+			}
+			return acc;
+		}, []);
+	},
 	setOptions(t){
 		this._objectDefaults({
 			prefix: "app_",
@@ -79,86 +80,95 @@ var store = {
 	removePrefix(t){
 		return t.replace(new RegExp(`^${this.prefix()}`), "")
 	},
-  	getRaw() {
+  	getRaw(){
 		var r = {};
 		var keys = this.keys();
 		for (var k in keys){
 			r[this.removePrefix(keys[k])] = this.deserialize(this.driver().getItem(keys[k]));
 		}
 		return r;
-    },
-    setRaw(object){
+	},
+	setRaw(object){
 		for(var k in object){
 			if(typeof object[k] != "function")
 				this.driver().setItem(this.prefix() + k, JSON.stringify(object[k]));
 		}
-    },
-    get(key, defaultValue){
-        var value = this.driver().getItem(this.prefix() + key);
-        return value === null ? defaultValue||null : this.deserialize(value)||defaultValue;
-    },
-    set(key, value) {
-        if (value === undefined) {
-            return this.remove(key);
-        }
+	},
+	get(key, defaultValue){
+		var value = this.driver().getItem(this.prefix() + key);
+		return value === null ? defaultValue||null : this.deserialize(value)||defaultValue;
+	},
+	set(key, value){
+		if (value === undefined){
+			return this.remove(key);
+		}
 		this.driver().setItem(this.prefix() + key, this.serialize(value));
 		this[key] = value;
-        return value;
-    },
-    delete(key){
-        this.remove(key);
-    },
-    remove(key){
+		return value;
+	},
+	delete(key){
+		this.remove(key);
+	},
+	remove(key){
 		name = this.prefix() + key;
-        this.driver().removeItem(name);
+		this.driver().removeItem(name);
 		this[key] = undefined;
 		delete this[key];
-    },
-    keys(){
+	},
+	keys(){
 		return Object.keys(this.driver()).filter(t => t.startsWith(this.prefix()))
-    },
-    clear(){
+	},
+	clear(){
 		var keys = this.keys();
 		for (var k in keys){
 			this.remove(this.removePrefix(keys[k]));
 		}
-    },
-    serialize(object){
-        return JSON.stringify(object);
-    },
-    deserialize(json){
+	},
+	serialize(object){
+		return JSON.stringify(object);
+	},
+	deserialize(json){
 		try{
 			return JSON.parse(json);
 		}catch(e){
 			return null;
 		}
-    }
+	}
 };
 
 var VueRLS = {
-    store: store,
-    install(Vue, options) {
-        store._initialize(options);
-        var values = store.getRaw();
+	store: store,
+	install(Vue, options){
+		store._initialize(options);
+		var values = store.getRaw();
 
-        Vue.mixin({
-            data() {
-                return {
-                    storage: Object.assign(store, values)
-                }
-            },
-            watch: {
-                storage: {
-                    handler(){
-                        store.setRaw(this.storage);
-                    },
-                    deep: true
-                }
-            }
-        });
-    }
+		window.addEventListener("storage", function(e){
+			var key = store.removePrefix(e.key);
+			if(e.newValue === null){
+				store.remove(key);
+			}else{
+				store.set(key, store.deserialize(e.newValue));
+			}
+		});
+
+		Vue.mixin({
+			data(){
+				return {
+					storage: Object.assign(store, values)
+				}
+			},
+			watch:{
+				storage:{
+					handler(){
+						store.setRaw(this.storage);
+					},
+					deep: true
+				}
+			}
+		});
+	}
 };
-    "undefined" != typeof window && (window.VueRLS = VueRLS), t.VueRLS = VueRLS, t.default = VueRLS, Object.defineProperty(t, "__esModule", {
-        value: !0
-    })
+	"undefined" != typeof window && (window.VueRLS = VueRLS), t.VueRLS = VueRLS, t.default = VueRLS, Object.defineProperty(t, "__esModule", {
+		value: !0
+	})
 });
