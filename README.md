@@ -86,10 +86,7 @@ Now you can acess `localStorage` or `sessionStorage` with namespace `storage` in
 	});
 	new Vue({
 		el: '#app',
-		template: `<center><br>My name is <input v-model="storage.name"><br>{{ storage.name }}</center>`,
-		created: function(){
-			this.storage.name = "Jacob";
-		}
+		template: `<center><br>My name is <input v-model="storage.name"><br>{{ storage.name }}</center>`
 	});
 	</script>
 </body>
