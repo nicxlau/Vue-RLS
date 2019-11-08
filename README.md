@@ -3,12 +3,12 @@
 # Vue-RLS
 #### Reactive wrapper over browser storage for Vue.js
 
-#### :squirrel: [Investigate the live demo](https://jco666.github.io/Vue-RLS/)
+#### :squirrel: [Investigate the live demo](https://nicolauns.github.io/Vue-RLS/)
 
 ## CDN Installation
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/jco666/Vue-RLS@1.1.0/dist/vue-rls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nicolauns/Vue-RLS@1.1.0/dist/vue-rls.min.js"></script>
 ```
 
 * This package is not on NPM, use GitHub source only.
@@ -76,7 +76,7 @@ Now you can acess `localStorage` or `sessionStorage` with namespace `storage` in
 	<div id="app"></div>
 
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/jco666/Vue-RLS@1.1.0/dist/vue-rls.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/nicolauns/Vue-RLS@1.1.0/dist/vue-rls.min.js"></script>
 	<script>
 	// Set initial configs
 	Vue.use(VueRLS, {
@@ -127,4 +127,4 @@ storage.clear();                     // destroy all variable from selected stora
 
 ## License
 
-[MIT](LICENSE) © [Jacob K.](http://lsdev.cf)
+[MIT](LICENSE) © [Nic.](http://ndev.cf)
